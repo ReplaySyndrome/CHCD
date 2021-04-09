@@ -17,18 +17,23 @@ public class EnemyMoving : MonoBehaviour
     private Vector3 dir;
     public float speed = 1.5f;
 
+    private void Awake()
+    {
+        Screen.SetResolution(1280, 1024, true, 60);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         myTransform = GetComponent<Transform>();
-
+        positionCollection.position = new Vector3(0, 0, 0);
         positionsArray = positionCollection.GetComponentsInChildren<Transform>();
 
 
-        foreach(var i in positionsArray)
-        {
-            Debug.Log(i.position.ToString() +  "    " + i.name);
-        }
+        //foreach(var i in positionsArray)
+        //{
+        //    Debug.Log(i.position.ToString() +  "    " + i.name);
+        //}
 
         myTransform.position = positionsArray[pivot].position;
         setDir();
@@ -45,7 +50,6 @@ public class EnemyMoving : MonoBehaviour
 
         Vector3 destPos = positionsArray[pivot + 1].position;
         Vector3 myPos = myTransform.position;
-
         Vector3 changeing = destPos - myPos;
 
 
@@ -61,7 +65,7 @@ public class EnemyMoving : MonoBehaviour
             && Mathf.Abs(destPos.y - myPos.y) < checkDistanceAmount)
         {
             pivot += 1;
-            Debug.Log("Pivot Plus");
+            //Debug.Log("Pivot Plus");
             setDir();
         }
 
@@ -72,12 +76,10 @@ public class EnemyMoving : MonoBehaviour
     {
         if (pivot >= positionsArray.Length - 1)
         {
-            Debug.Log("뭐가문제양");
             gameObject.GetComponent<EnemyMoving>().enabled = false;
             Destroy(gameObject);
             return;
         }
-        Debug.Log("아ㅓㄴ제냐");
         dir = positionsArray[pivot + 1].position - positionsArray[pivot].position;
     }
 }
