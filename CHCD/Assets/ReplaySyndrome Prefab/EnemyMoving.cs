@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class EnemyMoving : MonoBehaviour
 {
 
@@ -13,20 +14,30 @@ public class EnemyMoving : MonoBehaviour
     private int pivot = 1;
     private Transform[] positionsArray;
     private float checkDistanceAmount = 0.1f;
-
+    private SpriteRenderer sr;
     private Vector3 dir;
     public float speed = 1.5f;
 
+
+    public float xAxisVariation;
+    public float yAxisVariation;
+
     private void Awake()
     {
-        Screen.SetResolution(1280, 1024, true, 60);
+        
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        positionCollection = GameObject.FindGameObjectWithTag("MonsterWay").GetComponent<Transform>();
+
+        xAxisVariation = UnityEngine.Random.Range(-3.0f, 3.0f);
+        yAxisVariation = UnityEngine.Random.Range(-3.0f, 3.0f);
+
         myTransform = GetComponent<Transform>();
-        positionCollection.position = new Vector3(0, 0, 0);
+        positionCollection.position = Vector3.zero;
         positionsArray = positionCollection.GetComponentsInChildren<Transform>();
 
 
@@ -44,31 +55,22 @@ public class EnemyMoving : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+       // Vector3 translateddir = dir + new Vector3(xAxisVariation, yAxisVariation, 0);
+
 
         myTransform.Translate(dir.normalized * Time.deltaTime * speed);
-
-        Vector3 destPos = positionsArray[pivot + 1].position;
+        Vector3 destPos = positionsArray[pivot + 1].position;       
         Vector3 myPos = myTransform.position;
         Vector3 changeing = destPos - myPos;
-
-
-        //if (changeing.normalized != new Vector3(dir.x, dir.y, dir.z).normalized)
-        //{
-        //    pivot += 1;
-        //    Debug.Log("Pivot Plus");
-        //    setDir();
-        //}
-
-
-        if (Mathf.Abs(destPos.x - myPos.x) < checkDistanceAmount
+        if (Mathf.Abs(destPos.x  - myPos.x) < checkDistanceAmount
             && Mathf.Abs(destPos.y - myPos.y) < checkDistanceAmount)
         {
             pivot += 1;
             //Debug.Log("Pivot Plus");
             setDir();
         }
-
+        
 
     }
 
@@ -81,5 +83,17 @@ public class EnemyMoving : MonoBehaviour
             return;
         }
         dir = positionsArray[pivot + 1].position - positionsArray[pivot].position;
+
+
+        if (dir.x > 0)
+        {
+            sr.flipX = false;
+        }
+        else
+        {
+            sr.flipX = true;
+        }
     }
+
 }
+
