@@ -6,7 +6,10 @@ public class Tower : MonoBehaviour
 {
     protected float cooltime = 3f;
     protected GameObject target;
-    public Texture2D texture;
+
+    public Texture2D bullet;
+   
+    protected string className = "BasicTower";
 
     // Start is called before the first frame update
     void Start()
@@ -19,4 +22,6 @@ public class Tower : MonoBehaviour
     {
         
     }
+
+
 }
