@@ -40,9 +40,9 @@ public class PlayerController : MonoBehaviour
 
         //Cursor.SetCursor(buttonImage.sprite.texture, cursorpos, CursorMode.ForceSoftware);
         isSelected = true;
-        Texture2D towerimage = seletedTower.GetComponent<SpriteRenderer>().sprite.texture;
+        //Texture2D towerimage = seletedTower.GetComponent<SpriteRenderer>().sprite.texture;
         
-        Cursor.SetCursor(towerimage, Vector2.zero, CursorMode.ForceSoftware);
+        //Cursor.SetCursor(towerimage, Vector2.zero, CursorMode.ForceSoftware);
 
     }
 

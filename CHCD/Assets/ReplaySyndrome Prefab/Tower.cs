@@ -44,7 +44,6 @@ public class Tower : MonoBehaviour
                     print(!enemies[i].GetComponent<Enemy>().IsDead);
                     if (!enemies[i].GetComponent<Enemy>().IsDead)
                     {
-                        print("น฿ป็!");
                         //Vector3 enemyPos = enemies[i].transform.position;
                         GameObject o = Instantiate(bullet, gameObject.transform);
                         o.GetComponent<Bullet>().Target = enemies[i];

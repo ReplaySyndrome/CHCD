@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private float damage = 100f;
+    private float damage = 30f;
     public float Damage
     {
         get

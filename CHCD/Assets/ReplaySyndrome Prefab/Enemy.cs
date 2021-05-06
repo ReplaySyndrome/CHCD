@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
 
     public void UnderAttack(float damage,bool isPhysicsType)
     {
-        print("╬П╢З╬Нец");
+        print(damage);
         if(isPhysicsType)
         {
             hp -= damage *  (1 - (physicsDefensivePower / 100f));
