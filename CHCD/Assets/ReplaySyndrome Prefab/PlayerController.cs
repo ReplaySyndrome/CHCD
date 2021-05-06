@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 using UnityEngineInternal;
 
 public class PlayerController : MonoBehaviour
 {
     public Camera mainCamera;
-    Image buttonImage;
+    GameObject seletedTower;
     public Texture2D originalCursorImage = null;
     bool isSelected = false;
 
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         Screen.SetResolution(720, 1080, true);
-
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
     
     }
 
@@ -33,19 +34,22 @@ public class PlayerController : MonoBehaviour
     public void TowerButtonClick(GameObject obj)
     {
         print("버튼눌려따");
-        buttonImage = obj.GetComponent<Image>();
+        seletedTower = obj;
 
-        Vector2 cursorpos = new Vector2(originalCursorImage.width / 2, originalCursorImage.width);
+        //Vector2 cursorpos = new Vector2(originalCursorImage.width / 2, originalCursorImage.width);
 
         //Cursor.SetCursor(buttonImage.sprite.texture, cursorpos, CursorMode.ForceSoftware);
         isSelected = true;
+        Texture2D towerimage = seletedTower.GetComponent<SpriteRenderer>().sprite.texture;
+        
+        Cursor.SetCursor(towerimage, Vector2.zero, CursorMode.ForceSoftware);
+
     }
 
 
     void MouseAction()
     {
 
-        print(isSelected);
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -56,16 +60,9 @@ public class PlayerController : MonoBehaviour
                 if (hit.collider.gameObject.GetComponent<ScreenRayHitter>() && isSelected)
                 {
                     GameObject objectHit = hit.collider.gameObject;
-                    Sprite temp = buttonImage.sprite;
-                    
-                    objectHit.GetComponent<SpriteRenderer>().sprite = buttonImage.sprite;
-                    objectHit.transform.localScale =  new Vector3(5.0f, 5.0f, 1f);
-                    print(objectHit.name);
+                    Instantiate(seletedTower, objectHit.transform.position,Quaternion.Euler(Vector3.zero));                                       
                     isSelected = false;
-
-                    Vector2 cursorpos = new Vector2(buttonImage.sprite.texture.width / 2, buttonImage.sprite.texture.width);
-
-
+                   Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
                     //Cursor.SetCursor(originalCursorImage, cursorpos, CursorMode.ForceSoftware);
                 }
             }

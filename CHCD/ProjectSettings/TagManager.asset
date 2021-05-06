@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - MonsterWay
+  - Monster
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - 
   - 
   - character
-  - 
+  - monster
   - 
   - 
   - 
@@ -48,6 +50,15 @@ TagManager:
   - name: Obstale
     uniqueID: 3147763835
     locked: 0
+  - name: TowerArrangement
+    uniqueID: 3155269859
+    locked: 0
+  - name: Bullet
+    uniqueID: 889161137
+    locked: 0
   - name: Monster
     uniqueID: 3816202547
+    locked: 0
+  - name: Tower
+    uniqueID: 978821639
     locked: 0

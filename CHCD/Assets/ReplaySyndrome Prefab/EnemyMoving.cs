@@ -18,6 +18,21 @@ public class EnemyMoving : MonoBehaviour
     private Vector3 dir;
     public float speed = 1.5f;
 
+    private float movedDistance = 0f;
+    public float MoveDistance
+    {
+        get
+        {
+            return movedDistance;
+        }
+        set
+        {
+
+        }
+
+    }
+
+
 
     public float xAxisVariation;
     public float yAxisVariation;
@@ -60,6 +75,7 @@ public class EnemyMoving : MonoBehaviour
 
 
         myTransform.Translate(dir.normalized * Time.deltaTime * speed);
+        movedDistance = Time.deltaTime * speed;
         Vector3 destPos = positionsArray[pivot + 1].position;       
         Vector3 myPos = myTransform.position;
         Vector3 changeing = destPos - myPos;
