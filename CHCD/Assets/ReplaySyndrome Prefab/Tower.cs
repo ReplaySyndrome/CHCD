@@ -41,7 +41,7 @@ public class Tower : MonoBehaviour
             {               
                 if(Vector3.Distance(enemies[i].transform.position, transform.position) < attackRange)
                 {
-                    print(!enemies[i].GetComponent<Enemy>().IsDead);
+
                     if (!enemies[i].GetComponent<Enemy>().IsDead)
                     {
                         //Vector3 enemyPos = enemies[i].transform.position;

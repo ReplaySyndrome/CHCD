@@ -65,6 +65,11 @@ public class PlayerController : MonoBehaviour
                    Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
                     //Cursor.SetCursor(originalCursorImage, cursorpos, CursorMode.ForceSoftware);
                 }
+
+                if(hit.collider.gameObject.GetComponent<StageStartButton>() != null)
+                {
+                    print("StartBitton");
+                }
             }
 
             else
