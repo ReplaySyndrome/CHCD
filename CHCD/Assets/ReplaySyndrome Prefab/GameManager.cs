@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public struct StageRound
 {
@@ -22,10 +23,14 @@ public class GameManager : MonoBehaviour
     public GameObject MonsterPrefab;
 
     public float coolTime = 0.0f;
-    private float deltatime = 0.0f;
+    public float deltatime = 0.0f;
     MonsterCollection monsterCollection;
 
-    private bool isWait = false;
+    private bool isWait = true;
+
+    public float acceleration = 1;
+
+    public Button startButton;
 
 
     List<StageRound> rounds;
@@ -33,7 +38,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        coolTime = 9999999;
+        startButton.gameObject.SetActive(true);
         monsterCollection = GameObject.FindGameObjectWithTag("MonsterCollection").GetComponent<MonsterCollection>();
         rounds = new List<StageRound>();
 
@@ -44,13 +50,14 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         deltatime += Time.deltaTime;
-
-        if(deltatime > coolTime)
+        print(coolTime);
+        if (deltatime > coolTime)
         {
             if (rounds.Count > 0)
             {
                 if (rounds[0].enemyList.Count > 0)
                 {
+                    startButton.gameObject.SetActive(false);
                     Instantiate(rounds[0].enemyList[0].Key);
                     deltatime = 0;
                     coolTime = rounds[0].enemyList[0].Value;
@@ -61,8 +68,12 @@ public class GameManager : MonoBehaviour
 
                 else if (rounds[0].enemyList.Count <= 0)
                 {
+
+                    coolTime = rounds[0].nextRoundCoolTime;
                     rounds.RemoveAt(0);
+                    WaitForNextRound();
                     print("라운드끝");
+                    
                 }
             }
             else if (rounds.Count <= 0)
@@ -85,9 +96,9 @@ public class GameManager : MonoBehaviour
         round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 2));
         round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 1));
         round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.5f));
-        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 7));
+        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.1f));
 
-        rounds.Add(new StageRound(round1, 15));
+        rounds.Add(new StageRound(round1, 30));
         //round2
         List<KeyValuePair<Enemy, float>> round2 = new List<KeyValuePair<Enemy, float>>();
         round2.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 3));
@@ -96,9 +107,9 @@ public class GameManager : MonoBehaviour
         round2.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 2));
         round2.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 1));
         round2.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.5f));
-        round2.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 7));
+        round2.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.1f));
 
-        rounds.Add(new StageRound(round2, 10));
+        rounds.Add(new StageRound(round2, 30));
 
         //round3
         List<KeyValuePair<Enemy, float>> round3 = new List<KeyValuePair<Enemy, float>>();
@@ -108,10 +119,23 @@ public class GameManager : MonoBehaviour
         round3.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 2));
         round3.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 1));
         round3.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.5f));
-        round3.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 7));
+        round3.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.1f));
 
         rounds.Add(new StageRound(round3, 100));
 
         
+    }
+
+    public void WaitForNextRound()
+    {
+        isWait = true;
+        startButton.gameObject.SetActive(true);
+    }
+
+    public void StartNextRound()
+    {
+        coolTime = 0;
+        startButton.gameObject.SetActive(false);
+        isWait = false;
     }
 }

@@ -18,6 +18,8 @@ public class EnemyMoving : MonoBehaviour
     private Vector3 dir;
     public float speed = 1.5f;
 
+    private GameManager gameManager;
+
     private float movedDistance = 0f;
     public float MoveDistance
     {
@@ -46,6 +48,8 @@ public class EnemyMoving : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+
         positionCollection = GameObject.FindGameObjectWithTag("MonsterWay").GetComponent<Transform>();
 
         xAxisVariation = UnityEngine.Random.Range(-3.0f, 3.0f);
@@ -74,7 +78,7 @@ public class EnemyMoving : MonoBehaviour
        // Vector3 translateddir = dir + new Vector3(xAxisVariation, yAxisVariation, 0);
 
 
-        myTransform.Translate(dir.normalized * Time.deltaTime * speed);
+        myTransform.Translate(dir.normalized * Time.deltaTime * speed *gameManager.acceleration);
         movedDistance = Time.deltaTime * speed;
         Vector3 destPos = positionsArray[pivot + 1].position;       
         Vector3 myPos = myTransform.position;

@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positionCollection: {fileID: 0}
-  speed: 1.5
+  speed: 1
   xAxisVariation: 0
   yAxisVariation: 0
 --- !u!61 &3669002148945963523
