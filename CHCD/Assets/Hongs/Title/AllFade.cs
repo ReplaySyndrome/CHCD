@@ -8,8 +8,8 @@ public class AllFade : MonoBehaviour
     public GameObject go;
 
     float timer = 0.0f;
-    public float waitingTime = 0.1f;
-    public float firstTime = 0.1f;
+    public float waitingTime = 1f;
+    public float firstTime = 3f;
     bool checking;
     bool inside;
     // Start is called before the first frame update
