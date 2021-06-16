@@ -28,12 +28,15 @@ public class Tower : MonoBehaviour
     {
         if(delaiedtime > cooltime)
         {
-            if (!enemies[0].GetComponent<Enemy>().IsDead)
+            if (enemies.Count > 0)
             {
-                //Vector3 enemyPos = enemies[i].transform.position;
-                GameObject o = Instantiate(bullet, gameObject.transform);
-                o.GetComponent<Bullet>().Target = enemies[0].gameObject;
-                delaiedtime = 0;
+                if (!enemies[0].GetComponent<Enemy>().IsDead)
+                {
+                    //Vector3 enemyPos = enemies[i].transform.position;
+                    GameObject o = Instantiate(bullet, gameObject.transform);
+                    o.GetComponent<Bullet>().Target = enemies[0].gameObject;
+                    delaiedtime = 0;
+                }
             }
 
             //Physics2D.OverlapCircleAll(transform.position, attackRange,13);

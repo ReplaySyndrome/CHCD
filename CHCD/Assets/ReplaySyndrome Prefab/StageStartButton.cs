@@ -10,9 +10,15 @@ public class StageStartButton : MonoBehaviour
     private GameManager gameManager;
     private Text text;
     // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         text = GetComponentInChildren<Text>();
+    }
+
+    void Start()
+    {
+        
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
         

@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         deltatime += Time.deltaTime;
-        print(coolTime);
         if (deltatime > coolTime)
         {
             if (rounds.Count > 0)
