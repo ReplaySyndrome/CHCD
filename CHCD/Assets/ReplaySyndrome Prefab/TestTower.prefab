@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2009567293533413794}
   - component: {fileID: 2009567293533413795}
   - component: {fileID: 2009567293533413792}
+  - component: {fileID: 5516859405209617676}
   m_Layer: 0
   m_Name: TestTower
   m_TagString: Untagged
@@ -97,3 +98,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 6
   bullet: {fileID: 8050706892328526886, guid: 07388cf2f4ad3b04bb1a22f653efd4df, type: 3}
+--- !u!58 &5516859405209617676
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009567293533413793}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2

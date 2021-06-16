@@ -91,6 +91,13 @@ public class GameManager : MonoBehaviour
         //round1
         List<KeyValuePair<Enemy, float>> round1 = new List<KeyValuePair<Enemy, float>>();
         round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 3));
+        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0));
+        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.05f));
+        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.05f));
+        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.05f));
+        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.05f));
+        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.05f));
+        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.05f));
         round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 5));
         round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 4));
         round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 2));
