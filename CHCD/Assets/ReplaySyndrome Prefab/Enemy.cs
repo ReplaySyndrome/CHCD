@@ -50,7 +50,6 @@ public class Enemy : MonoBehaviour
             gameObject.SetActive(false);
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             isDead = true;
-            print("»ç¸Á¶ì");
         }
     }
 
@@ -59,7 +58,6 @@ public class Enemy : MonoBehaviour
         if (other.tag == "Bullet")
         {
             UnderAttack(other.GetComponent<Bullet>().Damage, other.GetComponent<Bullet>().isPhysical);
-            print("°ø°ÝÇØµû");
         }
     }
 }

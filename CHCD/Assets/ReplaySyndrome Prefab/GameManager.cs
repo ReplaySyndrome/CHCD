@@ -26,7 +26,12 @@ public class GameManager : MonoBehaviour
     public float deltatime = 0.0f;
     MonsterCollection monsterCollection;
 
+
+    public int gold = 1000;
+    public int life = 3;
+
     private bool isWait = true;
+    private bool isEnd = false;
 
     public float acceleration = 1;
 
@@ -62,7 +67,6 @@ public class GameManager : MonoBehaviour
                     coolTime = rounds[0].enemyList[0].Value;
                     rounds[0].enemyList.RemoveAt(0);
 
-                    print(rounds[0].enemyList.Count.ToString() + "남았다");
                 }
 
                 else if (rounds[0].enemyList.Count <= 0)
@@ -71,14 +75,13 @@ public class GameManager : MonoBehaviour
                     coolTime = rounds[0].nextRoundCoolTime;
                     rounds.RemoveAt(0);
                     WaitForNextRound();
-                    print("라운드끝");
                     
                 }
             }
             else if (rounds.Count <= 0)
             {
                 coolTime = 9999999;
-                print("게임끝");
+                isEnd = true;
             }
         }
     }
@@ -90,13 +93,13 @@ public class GameManager : MonoBehaviour
         //round1
         List<KeyValuePair<Enemy, float>> round1 = new List<KeyValuePair<Enemy, float>>();
         round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 3));
-        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0));
-        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.05f));
-        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.05f));
-        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.05f));
-        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.05f));
-        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.05f));
-        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.05f));
+        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.blueVirus, 0.5f));
+        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenVirus, 0.7f));
+        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.5f));
+        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.5f));
+        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.5f));
+        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.5f));
+        round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 0.5f));
         round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 5));
         round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 4));
         round1.Add(new KeyValuePair<Enemy, float>(monsterCollection.greenMonster, 2));
@@ -140,6 +143,13 @@ public class GameManager : MonoBehaviour
 
     public void StartNextRound()
     {
+        if(isEnd == true)
+        {
+            print("여기검사중");
+            var a = FindObjectsOfType<Enemy>();
+            print("---------------------");
+        }
+
         coolTime = 0;
         startButton.gameObject.SetActive(false);
         isWait = false;

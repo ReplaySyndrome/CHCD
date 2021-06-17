@@ -8,6 +8,10 @@ public class Bullet : MonoBehaviour
 
     GameObject target;
     public float speed = 10f;
+
+    private float madeTime;
+
+    public Vector3 dir;
     public GameObject Target
     {
         get
@@ -42,17 +46,52 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 dir = target.transform.position - transform.position;
-        transform.Translate(dir.normalized * Time.deltaTime * speed);
-        if (Vector3.Distance(target.transform.position, transform.position) < minDistance)
+
+   
+        if (target == null)
         {
-            
-            target.GetComponent<Enemy>().UnderAttack(damage, isPhysical);
-            gameObject.SetActive(false);
-            Destroy(gameObject);
+            madeTime += Time.deltaTime;
+
+            if (madeTime > 0.5f)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            if (madeTime - Time.time < 3)
+            {
+                transform.Translate(dir.normalized * Time.deltaTime * speed);
+                
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        else
+        {
+            dir = target.transform.position - transform.position;
+            transform.Translate(dir.normalized * Time.deltaTime * speed);
+            if (Vector3.Distance(target.transform.position, transform.position) < minDistance)
+            {
+
+                target.GetComponent<Enemy>().UnderAttack(damage, isPhysical);
+                gameObject.SetActive(false);
+                Destroy(gameObject);
+            }
         }
     }
 
-   
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(target == null)
+        {
+            collision.GetComponent<Enemy>().UnderAttack(damage - 10, false);
+            
+        }
+        
+    }
+
+
 
 }

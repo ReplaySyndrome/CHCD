@@ -32,6 +32,8 @@ public class StageStartButton : MonoBehaviour
         {
             text.text = Convert.ToInt32(gameManager.coolTime - gameManager.deltatime).ToString();
         }
+
+        
     }
 
     private void OnEnable()

@@ -9,6 +9,7 @@ using UnityEngineInternal;
 public class PlayerController : MonoBehaviour
 {
     public Camera mainCamera;
+    private GameManager gameManager;
     GameObject seletedTower;
     public Texture2D originalCursorImage = null;
     bool isSelected = false;
@@ -19,6 +20,10 @@ public class PlayerController : MonoBehaviour
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         Screen.SetResolution(720, 1080, true);
         Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
+
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+
+
     
     }
 
@@ -33,7 +38,6 @@ public class PlayerController : MonoBehaviour
 
     public void TowerButtonClick(GameObject obj)
     {
-        print("버튼눌려따");
         seletedTower = obj;
 
         //Vector2 cursorpos = new Vector2(originalCursorImage.width / 2, originalCursorImage.width);
@@ -62,7 +66,7 @@ public class PlayerController : MonoBehaviour
                     GameObject objectHit = hit.collider.gameObject;
                     Instantiate(seletedTower, objectHit.transform.position,Quaternion.Euler(Vector3.zero));                                       
                     isSelected = false;
-                   Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
+                    Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
                     //Cursor.SetCursor(originalCursorImage, cursorpos, CursorMode.ForceSoftware);
                 }
 
@@ -70,11 +74,6 @@ public class PlayerController : MonoBehaviour
                 {
                     print("StartBitton");
                 }
-            }
-
-            else
-            {
-                print("검출되지않았습니다.");
             }
 
             
