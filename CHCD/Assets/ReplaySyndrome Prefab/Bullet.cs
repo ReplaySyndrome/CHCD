@@ -86,7 +86,7 @@ public class Bullet : MonoBehaviour
     {
         if(target == null)
         {
-            collision.GetComponent<Enemy>().UnderAttack(damage - 10, false);
+            collision.GetComponent<Enemy>().UnderAttack(damage - 16, false);
             
         }
         

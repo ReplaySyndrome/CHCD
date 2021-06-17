@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tower2 : MonoBehaviour
 {
-    protected float cooltime = 1f;
+    protected float cooltime = 1.5f;
     protected float delaiedtime = 3f;
     public float attackRange = 30f;
 
