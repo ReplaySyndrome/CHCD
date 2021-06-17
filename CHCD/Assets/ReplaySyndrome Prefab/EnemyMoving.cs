@@ -2,12 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
+using UnityEngine.SceneManagement;
 public class EnemyMoving : MonoBehaviour
 {
 
-
+    
     public Transform positionCollection;
 
     private Transform myTransform;
@@ -19,6 +18,12 @@ public class EnemyMoving : MonoBehaviour
     public float speed = 1.5f;
 
     private GameManager gameManager;
+
+    public bool bangyokPass = false;
+
+    private int bangyokPivot = 8;
+    private int bangyokPivotDest = 11;
+
 
     private float movedDistance = 0f;
     public float MoveDistance
@@ -48,6 +53,11 @@ public class EnemyMoving : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        if(SceneManager.GetActiveScene().name == "RealStage02")
+        {
+            bangyokPass = true;
+        }
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
         positionCollection = GameObject.FindGameObjectWithTag("MonsterWay").GetComponent<Transform>();
@@ -100,9 +110,22 @@ public class EnemyMoving : MonoBehaviour
         {
             gameObject.GetComponent<EnemyMoving>().enabled = false;
             Destroy(gameObject);
+            gameManager.life -= 1;
             return;
         }
-        dir = positionsArray[pivot + 1].position - positionsArray[pivot].position;
+
+        if(pivot == bangyokPivot)
+        {
+            if (FindObjectOfType<BangYok>().col.enabled)
+            {
+                dir = positionsArray[bangyokPivotDest + 1].position - positionsArray[bangyokPivot].position;
+                pivot = bangyokPivotDest;
+            }
+        }
+        
+        dir = positionsArray[pivot + 1].position - transform.position;
+        
+        
 
 
         if (dir.x > 0)

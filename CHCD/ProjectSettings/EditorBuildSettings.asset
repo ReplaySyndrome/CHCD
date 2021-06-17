@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Hongs/Stage/StageSelect.unity
     guid: 0670ba978714afd459a00b8a9c3f2e73
+  - enabled: 1
+    path: Assets/Scenes/RealStage01.unity
+    guid: 54182dea03b69d1439f5abac36434093
+  - enabled: 1
+    path: Assets/Hongs/Stage Clears.unity
+    guid: 6010f2ddcad13184babcc24d04a0729b
   m_configObjects: {}

@@ -47,6 +47,7 @@ public class Enemy : MonoBehaviour
         if(hp <= 0)
         {
             Destroy(gameObject, 10f);
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().gold += 30;
             gameObject.SetActive(false);
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             isDead = true;

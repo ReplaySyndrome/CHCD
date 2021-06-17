@@ -68,12 +68,23 @@ public class PlayerController : MonoBehaviour
                     Instantiate(seletedTower, objectHit.transform.position,Quaternion.Euler(Vector3.zero));                                       
                     isSelected = false;
                     Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
+                    gameManager.gold -= 200;
                     //Cursor.SetCursor(originalCursorImage, cursorpos, CursorMode.ForceSoftware);
                 }
 
-                if(hit.collider.gameObject.GetComponent<StageStartButton>() != null)
+                if(hit.collider.gameObject.GetComponent<BangYok>() != null)
                 {
-                    print("StartBitton");
+                    if(gameManager.gold > 15)
+                    {
+                        var a = hit.collider.gameObject.GetComponent<BangYok>();
+                        a.sprites[0].enabled = true;
+                        a.sprites[1].enabled = true;
+
+                        a.col.enabled = false;
+                        a.sprites[2].enabled = false;
+                        a.deltaTime = 0;
+                        gameManager.gold -= 50;
+                    }
                 }
             }
 

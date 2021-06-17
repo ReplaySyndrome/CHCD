@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public struct StageRound
 {
@@ -74,15 +75,45 @@ public class GameManager : MonoBehaviour
 
                     coolTime = rounds[0].nextRoundCoolTime;
                     rounds.RemoveAt(0);
+
+                    if(rounds.Count <= 0)
+                    {
+                        coolTime = 9999999;
+                        print("场");
+                        isEnd = true;
+                        isWait = false;
+                        coolTime = 0;
+                        startButton.gameObject.SetActive(false);
+                    }
                     WaitForNextRound();
                     
                 }
             }
             else if (rounds.Count <= 0)
             {
-                coolTime = 9999999;
+                coolTime = 0;
+                print("场");
                 isEnd = true;
+                isWait = false;
+                coolTime = 0;
+                startButton.gameObject.SetActive(false);
             }
+        }
+
+        if (isEnd)
+        {
+            var a = GameObject.FindGameObjectsWithTag("Monster");
+            if (a.Length == 0)
+            {
+                print("场车促");
+                SceneManager.LoadScene("Stage Clears");
+            }
+        }
+
+
+        if(life <= 0)
+        {
+            SceneManager.LoadScene("StageSelect");
         }
     }
 
@@ -146,8 +177,14 @@ public class GameManager : MonoBehaviour
         if(isEnd == true)
         {
             print("咯扁八荤吝");
-            var a = FindObjectsOfType<Enemy>();
-            print("---------------------");
+            var a = GameObject.FindGameObjectsWithTag("Monster");
+            if (a.Length == 0)
+            {
+                print("场车促");
+                SceneManager.LoadScene("Stage Clear");
+            }
+
+            return;
         }
 
         coolTime = 0;
