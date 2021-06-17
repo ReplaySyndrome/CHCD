@@ -51,7 +51,8 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void MouseAction()
+    void MouseAction
+        ()
     {
 
         if (Input.GetMouseButtonDown(0))
